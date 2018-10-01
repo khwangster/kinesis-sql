@@ -17,8 +17,8 @@ val awsSDKVersion = "1.11.419"
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-parent" % sparkVersion % "provided",
   "org.apache.spark" %% "spark-sql" % sparkVersion % "provided",
-  "com.amazonaws" % "amazon-kinesis-client" % "1.8.10",
-  "com.amazonaws" % "amazon-kinesis-producer" % "0.12.8",
+  "com.amazonaws" % "amazon-kinesis-client" % "1.9.2",
+  "com.amazonaws" % "amazon-kinesis-producer" % "0.12.9",
   "com.amazonaws" % "aws-java-sdk-sts" % awsSDKVersion,
   "com.amazonaws" % "aws-java-sdk-kinesis" % awsSDKVersion,
   "com.fasterxml.jackson.dataformat" % "jackson-dataformats-binary" % "2.9.7" pomOnly(),
