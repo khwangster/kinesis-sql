@@ -79,17 +79,15 @@ private[kinesis] class KinesisSourceProvider extends DataSourceRegister
         .map { k => k.drop(8).toString -> parameters(k) }
         .toMap
 
-    val streamName = caseInsensitiveParams.get(STREAM_NAME_KEY).get
+    val streamName = caseInsensitiveParams(STREAM_NAME_KEY)
 
-    val awsAccessKeyId = caseInsensitiveParams.get(AWS_ACCESS_KEY_ID).getOrElse("")
-    val awsSecretKey = caseInsensitiveParams.get(AWS_SECRET_KEY).getOrElse("")
-    val awsStsRoleArn = caseInsensitiveParams.get(AWS_STS_ROLE_ARN).getOrElse("")
-    val awsStsSessionName = caseInsensitiveParams.get(AWS_STS_SESSION_NAME).getOrElse("")
+    val awsAccessKeyId = caseInsensitiveParams.getOrElse(AWS_ACCESS_KEY_ID, "")
+    val awsSecretKey = caseInsensitiveParams.getOrElse(AWS_SECRET_KEY, "")
+    val awsStsRoleArn = caseInsensitiveParams.getOrElse(AWS_STS_ROLE_ARN, "")
+    val awsStsSessionName = caseInsensitiveParams.getOrElse(AWS_STS_SESSION_NAME, "")
 
-    val regionName = caseInsensitiveParams.get(REGION_NAME_KEY)
-      .getOrElse(DEFAULT_KINESIS_REGION_NAME)
-    val endPointURL = caseInsensitiveParams.get(END_POINT_URL)
-      .getOrElse(DEFAULT_KINESIS_ENDPOINT_URL)
+    val regionName = caseInsensitiveParams.getOrElse(REGION_NAME_KEY, DEFAULT_KINESIS_REGION_NAME)
+    val endPointURL = caseInsensitiveParams.getOrElse(END_POINT_URL, DEFAULT_KINESIS_ENDPOINT_URL)
 
     val initialPosition: KinesisPosition = getKinesisPosition(caseInsensitiveParams)
 
@@ -108,7 +106,7 @@ private[kinesis] class KinesisSourceProvider extends DataSourceRegister
 
   private def validateStreamOptions(caseInsensitiveParams: Map[String, String]) = {
     if (!caseInsensitiveParams.contains(STREAM_NAME_KEY) ||
-      caseInsensitiveParams.get(STREAM_NAME_KEY).get.isEmpty) {
+      caseInsensitiveParams(STREAM_NAME_KEY).isEmpty) {
       throw new IllegalArgumentException(
         "Stream name is a required field")
     }
@@ -158,17 +156,15 @@ private[kinesis] class KinesisSourceProvider extends DataSourceRegister
         .map { k => k.drop(8).toString -> parameters(k) }
         .toMap
 
-    val streamName = caseInsensitiveParams.get(STREAM_NAME_KEY).get
+    val streamName = caseInsensitiveParams(STREAM_NAME_KEY)
 
-    val awsAccessKeyId = caseInsensitiveParams.get(AWS_ACCESS_KEY_ID).getOrElse("")
-    val awsSecretKey = caseInsensitiveParams.get(AWS_SECRET_KEY).getOrElse("")
-    val awsStsRoleArn = caseInsensitiveParams.get(AWS_STS_ROLE_ARN).getOrElse("")
-    val awsStsSessionName = caseInsensitiveParams.get(AWS_STS_SESSION_NAME).getOrElse("")
+    val awsAccessKeyId = caseInsensitiveParams.getOrElse(AWS_ACCESS_KEY_ID, "")
+    val awsSecretKey = caseInsensitiveParams.getOrElse(AWS_SECRET_KEY, "")
+    val awsStsRoleArn = caseInsensitiveParams.getOrElse(AWS_STS_ROLE_ARN, "")
+    val awsStsSessionName = caseInsensitiveParams.getOrElse(AWS_STS_SESSION_NAME, "")
 
-    val regionName = caseInsensitiveParams.get(REGION_NAME_KEY)
-      .getOrElse(DEFAULT_KINESIS_REGION_NAME)
-    val endPointURL = caseInsensitiveParams.get(END_POINT_URL)
-      .getOrElse(DEFAULT_KINESIS_ENDPOINT_URL)
+    val regionName = caseInsensitiveParams.getOrElse(DEFAULT_KINESIS_REGION_NAME, REGION_NAME_KEY)
+    val endPointURL = caseInsensitiveParams.getOrElse(DEFAULT_KINESIS_ENDPOINT_URL, END_POINT_URL)
 
     val initialPosition: KinesisPosition = getKinesisPosition(caseInsensitiveParams)
 
